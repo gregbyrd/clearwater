@@ -5,4 +5,15 @@ class Season < ActiveRecord::Base
   validates :year, numericality: true
   validates :slot_limit, numericality: true
 
+  def start_date
+    Date.new(year, start_month)
+  end
+  def end_date
+    if end_month >= start_month
+      Date.new(year, end_month, -1)
+    else
+      Date.new(year+1, end_month, -1)
+    end
+  end
+
 end
