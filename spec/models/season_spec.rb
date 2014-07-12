@@ -2,22 +2,13 @@ require 'rails_helper'
 
 describe Season, :type => :model do
   describe 'validations' do
-    it 'should validate start month' do
-      s = Season.new(:start_month => 13)
-      expect(s.valid?).to eq(false)
-    end
-    it 'should validate end month' do
-      s = Season.new(:end_month => 13)
-      expect(s.valid?).to eq(false)
-    end
-    it 'should validate year' do
-      s = Season.new(:year => nil)
-      expect(s.valid?).to eq(false)
-    end
-    it 'should validate slot limit' do
-      s = Season.new(:slot_limit => nil)
-      expect(s.valid?).to eq(false)
-    end
+    it { should validate_numericality_of(:start_month).
+      is_greater_than(0).is_less_than(13) }
+    it { should validate_numericality_of(:end_month).
+      is_greater_than(0).is_less_than(13) }
+    it { should validate_numericality_of(:year).is_greater_than(0) }
+    it { should validate_numericality_of(:slot_limit).is_greater_than(0) }
+    it { should have_many(:fish_dates) }
   end
 
   describe 'dates' do

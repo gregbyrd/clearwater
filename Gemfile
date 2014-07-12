@@ -9,10 +9,11 @@ group :development, :test do
   gem 'debugger'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails', require: false
   gem 'cucumber-rails-training-wheels'
   gem 'capybara'
   gem 'launchy'
+  gem 'shoulda-matchers', require: false
 end
 group :production do
   gem 'mysql2'

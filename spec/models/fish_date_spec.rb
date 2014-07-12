@@ -6,5 +6,6 @@ describe FishDate, :type => :model do
       fd = FishDate.new(:day => 10)
       expect(fd.valid?).to eq(false)
     end
+    it { should belong_to(:season) }
   end
 end

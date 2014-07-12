@@ -1,5 +1,5 @@
 class FishDate < ActiveRecord::Base
-  belongs_to :season_id
+  belongs_to :season
   validates_presence_of :season_id
   has_many :slots
   validate :day_is_date?
