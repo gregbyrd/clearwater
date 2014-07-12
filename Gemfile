@@ -7,18 +7,15 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   gem 'debugger'
-end
-group :production do
-  gem 'mysql2'
-end
-
-group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
   gem 'capybara'
   gem 'launchy'
+end
+group :production do
+  gem 'mysql2'
 end
 
 
