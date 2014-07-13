@@ -43,7 +43,7 @@ describe Season, :type => :model do
   describe "#in_season?" do
     let (:season) { FactoryGirl.build(Season) }
     it 'should be false before start date' do
-      expect(season.in_season?(season.start_date - 1)).to eq(false)
+      expect(season.in_season?(season.start_date - 1)).to not_be
     end
     it 'should be false after end date' do
       expect(season.in_season?(season.end_date + 1)).to eq(false)
