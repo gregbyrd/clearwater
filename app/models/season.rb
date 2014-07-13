@@ -16,4 +16,8 @@ class Season < ActiveRecord::Base
     end
   end
 
+  def in_season?(date)
+    date >= start_date && date <= end_date
+  end
+
 end

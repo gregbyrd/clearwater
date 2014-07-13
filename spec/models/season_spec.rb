@@ -11,7 +11,7 @@ describe Season, :type => :model do
     it { should have_many(:fish_dates) }
   end
 
-  describe 'dates' do
+  describe '#start_date and #end_date' do
     it 'should convert start month to date' do
       s = Season.new(:year => 2013,
                      :start_month => 10,
@@ -39,5 +39,24 @@ describe Season, :type => :model do
       expect(ed.month).to eq(4)
       expect(ed.day).to eq(30)
     end
+  end
+  describe "#in_season?" do
+    let (:season) { FactoryGirl.build(Season) }
+    it 'should be false before start date' do
+      expect(season.in_season?(season.start_date - 1)).to eq(false)
+    end
+    it 'should be false after end date' do
+      expect(season.in_season?(season.end_date + 1)).to eq(false)
+    end
+    it 'should be true for start date' do
+      expect(season.in_season?(season.start_date)).to eq(true)
+    end
+    it 'should be true for end date' do
+      expect(season.in_season?(season.end_date)).to eq(true)
+    end
+    it 'should be true for in-between date' do
+      expect(season.in_season?(season.start_date + 10)).to eq(true)
+    end
+
   end
 end
