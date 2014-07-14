@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712150350) do
+ActiveRecord::Schema.define(version: 20140714134252) do
 
   create_table "fish_dates", force: true do |t|
     t.date     "day"
@@ -30,5 +30,16 @@ ActiveRecord::Schema.define(version: 20140712150350) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "slots", force: true do |t|
+    t.integer  "fish_date_id"
+    t.integer  "user_id"
+    t.string   "label"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "slots", ["fish_date_id"], name: "index_slots_on_fish_date_id"
+  add_index "slots", ["user_id"], name: "index_slots_on_user_id"
 
 end
