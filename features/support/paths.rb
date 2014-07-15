@@ -22,6 +22,13 @@ module NavigationHelpers
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
 
+    when /^the login page$/
+      new_session_path
+    when /^the User page for (.*)$/i
+      user_path(User.find_by_email($1))
+    when /^the Admin page$/
+      admin_path
+
     else
       begin
         page_name =~ /^the (.*) page$/
