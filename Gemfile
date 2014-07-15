@@ -49,9 +49,11 @@ group :doc do
 end
 
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.2'
-gem 'bcrypt-ruby', '~> 3.1.2'  
+gem 'bcrypt', '~> 3.1.2' # changed name
+gem 'bcrypt-ruby', '~> 3.1.2'  # seems to be needed for has_secure_password
 
+# Use Pundit for authorization
+gem 'pundit'
 
 # Use unicorn as the app server
 # gem 'unicorn'
