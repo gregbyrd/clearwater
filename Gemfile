@@ -55,6 +55,9 @@ gem 'bcrypt-ruby', '~> 3.1.2'  # seems to be needed for has_secure_password
 # Use Pundit for authorization
 gem 'pundit'
 
+# Use acts_as_singleton to provide a single Properties record
+gem 'acts_as_singleton'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
