@@ -2,13 +2,17 @@
 
 FactoryGirl.define do
   factory :user do
-    firstname "MyString"
-    lastname "MyString"
-    email "MyString"
-    phone "MyString"
-    password_digest "MyString"
-    purchased 1
-    guests "MyText"
+    firstname "John"
+    lastname "Doe"
+    email "jd@gmail.com"
+    phone "919-555-5555"
+    password "abc"
+    purchased 0
     admin false
+
+    trait :admin do
+      admin true
+    end
+
   end
 end
