@@ -57,6 +57,18 @@ describe Season, :type => :model do
     it 'should be true for in-between date' do
       expect(season.in_season?(season.start_date + 10)).to be
     end
+  end
 
+  describe "#name" do
+    it 'should span starting and ending year' do
+      s =  FactoryGirl.build(:season, year: 2014,
+                             start_month: 10, end_month: 4)
+      expect(s.name).to eql("2014-15")
+    end
+    it 'should handle single-year season' do
+      s = FactoryGirl.build(:season, year: 2014,
+                            start_month: 4, end_month: 10)
+      expect(s.name).to eql("2014")
+    end
   end
 end

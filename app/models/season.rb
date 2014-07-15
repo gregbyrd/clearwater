@@ -19,5 +19,13 @@ class Season < ActiveRecord::Base
   def in_season?(date)
     date >= start_date && date <= end_date
   end
+  
+  def name
+    if end_month <= start_month
+      "#{year}-#{(year+1)%100}"
+    else
+      "#{year}"
+    end
+  end
 
 end
