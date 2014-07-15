@@ -7,6 +7,7 @@ FactoryGirl.define do
     email "jd@gmail.com"
     phone "919-555-5555"
     password "abc"
+    password_confirmation "abc"
     purchased 0
     admin false
 

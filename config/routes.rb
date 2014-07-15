@@ -7,6 +7,11 @@ Clearwater::Application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resources :users
   get 'admin' => 'admin#show'
+  namespace :admin do
+    resources :seasons
+    resources :fish_dates
+    resources :users
+  end
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
