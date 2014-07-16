@@ -1,9 +1,9 @@
 Clearwater::Application.routes.draw do
-  get "admin/show"
-  get "admin_controller/show"
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
+  get "admin/show"
   resource :session, only: [:new, :create, :destroy]
   resources :users
   get 'admin' => 'admin#show'
@@ -12,6 +12,7 @@ Clearwater::Application.routes.draw do
     resources :fish_dates
     resources :users
   end
+  root "sessions#new"
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

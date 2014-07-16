@@ -18,14 +18,14 @@ class SessionsController < ApplicationController
       end
     else
       flash[:notice] = 'Invalid email or password.'
-      render :new
+      redirect_to new_session_path
     end
   end
 
   def destroy
     session[:user_id] = nil
     flash[:notice] = 'Signed out successfully.'
-    render :new
+    redirect_to new_session_path
   end
 end
 

@@ -15,3 +15,11 @@ Given /I am logged in as admin/ do
   click_button('Log in')
 end
 
+Given /I am logged in as user/ do
+  admin = FactoryGirl.create(:user)
+  visit path_to("the login page")
+  fill_in('email', :with => admin.email)
+  fill_in('password', :with=> 'abc')
+  click_button('Log in')
+end
+

@@ -24,3 +24,22 @@ Scenario: Login as admin
   And I press "Log in"
   Then I should be on the Admin page
 
+Scenario: Unknown user
+  Given I am on the login page
+  When I fill in the following:
+    | email    | foo@gmail.com   |
+    | password | abc123          |
+  And I press "Log in"
+  Then I should be on the login page
+  And I should see "Invalid"
+
+Scenario: Wrong password
+  Given I am on the login page
+  When I fill in the following:
+    | email    | abc@gmail.com   |
+    | password | xyz             |
+  And I press "Log in"
+  Then I should be on the login page
+  And I should see "Invalid"
+
+
