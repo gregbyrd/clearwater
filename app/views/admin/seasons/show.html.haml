@@ -1,0 +1,8 @@
+%h1 #{@season.year}
+
+%h1 Dates
+
+%table
+  - @dates.each do |d|
+    %tr
+      %td= d.day

@@ -1,0 +1,20 @@
+%h1 Create New Season
+
+= form_tag(admin_seasons_path, method: :post) do
+  %p
+    = label_tag :year, "Year"
+    = select_year(Date.today)
+  %p
+    = label_tag :start_month, "Start Month"
+    = select_month(10, field_name: :start_month)
+  %p
+    = label_tag :end_month, "End Month"
+    = select_month(4, field_name: :end_month)
+  %p
+    = label_tag :slot_limit, "Slot Limit"
+    = text_field_tag :slot_limit, '', size: 5
+  %p
+    = submit_tag "Create"
+
+
+
