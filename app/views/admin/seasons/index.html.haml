@@ -1,11 +1,9 @@
 %h1 Seasons
 
-%table
-  - @seasons.each do |s|
-    %tr
-      %td= link_to "#{s.year}", admin_season_path(s)
-      %td= s.start_date
-      %td= s.end_date
+
+= div_for(@seasons) do |season|
+  #{season.year}: #{season.start_date.strftime('%b \'%y')} - #{season.end_date.strftime('%b \'%y')}
+
 
 =link_to "New", new_admin_season_path
 =link_to "Admin", admin_path
