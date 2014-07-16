@@ -8,6 +8,7 @@
     = yield :head
   %body
     = image_tag "TFF_Logo_green.jpg", height: 50
+    = button_to 'Logout', session_path, method: :delete
     <br />
     - flash.each do | name, msg |
       = content_tag :div, msg, class: name
