@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :property, :class => 'Properties' do
-    current_season_id 1
+    initialize_with { Properties.instance }
   end
 end

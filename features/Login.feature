@@ -1,10 +1,12 @@
 Feature: User can login
 
 Background:
+  Given a current season
   Given the following users exist:
     | email           | password  | admin |
     | abc@gmail.com   | abc123    | false |
     | admin@gmail.com | abc123    | true  |
+
 
 
 Scenario: Login as user

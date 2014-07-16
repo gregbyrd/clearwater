@@ -6,7 +6,16 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.where(email: params[:email]).first
+    # look for email and current season,
+    # except admins do not have a season
+    users = User.where(email: params[:email])
+    # look for admin first...
+    user = users.find {|u| u.admin? }
+    # ... if no admin, look for user in current season
+    if !user
+      s = current_season
+      user = users.find {|u| u.season.id == s.id } if s
+    end
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id

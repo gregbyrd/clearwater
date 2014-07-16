@@ -10,6 +10,7 @@ FactoryGirl.define do
     password_confirmation "abc"
     purchased 0
     admin false
+    season nil
 
     trait :admin do
       admin true

@@ -1,9 +1,12 @@
 Given /the following users exist/ do |user_table|
   user_table.hashes.each do |user|
-    User.create!(email: user[:email],
-                 password: user[:password],
-                 password_confirmation: user[:password],
-                 admin: user[:admin])
+    FactoryGirl.create(:user,
+                       email: user[:email],
+                       password: user[:password],
+                       password_confirmation: user[:password],
+                       admin: user[:admin],
+                       season: user[:season] || 
+                               Season.find(Properties.instance.current_season_id))
   end
 end
 
@@ -16,10 +19,21 @@ Given /I am logged in as admin/ do
 end
 
 Given /I am logged in as user/ do
-  admin = FactoryGirl.create(:user)
+  step 'a current season'
+  admin = FactoryGirl.create(:user, admin: false,
+                             season: Season.find(Properties.instance.current_season_id))
   visit path_to("the login page")
   fill_in('email', :with => admin.email)
   fill_in('password', :with=> 'abc')
   click_button('Log in')
 end
+
+Given /a current season/ do
+  s = FactoryGirl.create(:season)
+  prop = FactoryGirl.create(:property)
+  prop.current_season_id = s.id
+  prop.save
+end
+
+
 
