@@ -5,7 +5,10 @@
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
+    = yield :head
   %body
+    = image_tag "TFF_Logo_green.jpg", height: 50
+    <br />
     - flash.each do | name, msg |
       = content_tag :div, msg, class: name
 
