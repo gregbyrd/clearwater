@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140715150321) do
+ActiveRecord::Schema.define(version: 20140716180545) do
 
   create_table "fish_dates", force: true do |t|
     t.date     "day"
@@ -59,6 +59,9 @@ ActiveRecord::Schema.define(version: 20140715150321) do
     t.boolean  "admin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "season_id"
   end
+
+  add_index "users", ["season_id"], name: "index_users_on_season_id"
 
 end

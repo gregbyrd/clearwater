@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  # every user belongs to a season, except for admin users
+  belongs_to :season
+
   has_many :slots
   has_many :fish_dates, through: :slots
   validates_presence_of :password_digest
