@@ -1,2 +1,0 @@
-= div_for(season) do
-  #{season.year}: #{season.start_date.strftime('%b \'%y')} - #{season.end_date.strftime('%b \'%y')}
