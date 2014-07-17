@@ -63,8 +63,12 @@ class Admin::UsersController < ApplicationController
     user = User.find(params[:id])
     if user
       authorize user
-      flash[:notice] = "User #{user.email} deleted."
-      user.destroy
+      if user.admin? && User.where(admin: true).count == 1
+        flash[:alert] = "Cannot delete the ONLY admin account!"
+      else
+        flash[:notice] = "User #{user.email} deleted."
+        user.destroy
+      end
     else
       flash[:warning] = "DELETE: User not found."
     end
