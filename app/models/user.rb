@@ -14,4 +14,17 @@ class User < ActiveRecord::Base
 
   serialize :guests, Array
 
+  def name
+    @name ||= create_name
+  end
+
+  def create_name
+    if firstname && lastname
+      [ firstname, lastname ].reject(&:empty?).join(' ')
+    else
+      firstname || lastname || ''
+    end
+  end
+  
+
 end

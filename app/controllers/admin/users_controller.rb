@@ -3,7 +3,6 @@ class Admin::UsersController < ApplicationController
 
   def index
     authorize User.new
-    @user = User.all.first
     @admin_users = User.where(admin: true)
     @seasons = Season.all.sort {|a,b| b.year <=> a.year }
 

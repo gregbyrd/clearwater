@@ -1,14 +1,14 @@
 %h1 Users
 
-= render @user
+- if @admin_users
+  %h2 
+    Admin Users
+  = render @admin_users
 
--#
-  - if @admin_users
-    %h2= Admin Users
-    = render partial: 'admin_user', collection: @admin_users
--#
-  - @seasons.each do |s|
-    %h2
-      Season: #{s.year}
-    = render s.users
+- @seasons.each do |s|
+  %h2
+    Season: #{s.year}
+  = render s.users
+
+
 
