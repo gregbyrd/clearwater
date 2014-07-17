@@ -28,6 +28,8 @@ module NavigationHelpers
       user_path(User.find_by_email($1))
     when /^the Admin page$/
       admin_path
+    when /^the admin edit page for (.+)$/i
+      edit_admin_user_path(User.find_by_email($1))
 
     else
       begin

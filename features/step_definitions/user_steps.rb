@@ -35,8 +35,22 @@ Given /a current season/ do
   prop.save
 end
 
+Given /test user is (.+)/ do |email|
+  @test_user = User.find_by_email(email)
+end
+
+When /I follow the "(.+)" link for user (.+)/ do |link, email|
+  user = User.find_by_email(email)
+  linkid = "#{link.downcase}_#{user.id}"
+  click_link(linkid)
+end
+
 Then /I find (.+) in Users/ do |email|
   expect(User.find_by_email(email)).to_not eq(nil)
+end
+
+Then /I do not find (.+) in Users/ do |email|
+  expect(User.find_by_email(email)).to eq(nil)
 end
 
 Then /(.+) is not admin/ do |email|
@@ -47,6 +61,17 @@ Then /(.+) is admin/ do |email|
   expect(User.find_by_email(email).admin?).to eq(true)
 end
 
+Then /user password should be "(.+)"/ do |passwd|
+  expect(@test_user.authenticate(passwd)).to eq(@test_user)
+end
+
+Then /test user (.+) should be "(.+)"/ do |method, value|
+  expect(@test_user.send(method)).to eq(value)
+end
+
+Then /test user (.+) should be (\d+)/ do |method, value|
+  expect(@test_user.send(method)).to eq(value.to_i)
+end
 
 
 
