@@ -30,6 +30,10 @@ module NavigationHelpers
       admin_path
     when /^the admin edit page for (.+)$/i
       edit_admin_user_path(User.find_by_email($1))
+    when /^the new admin date page$/
+      new_admin_fish_date_path
+    when /^the admin dates page$/
+      admin_fish_dates_path
 
     else
       begin

@@ -1,0 +1,7 @@
+%h1 Dates for season: #{current_season.year}
+
+- @dates.each do |d|
+  = d.day.to_formatted_s(:long)
+  %br/
+
+%p= link_to "Add Date", new_admin_fish_date_path
