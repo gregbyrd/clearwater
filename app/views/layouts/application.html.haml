@@ -7,9 +7,8 @@
     = csrf_meta_tags
     = yield :head
   %body
-    = image_tag "TFF_Logo_green.jpg", height: 50
-    = button_to 'Logout', session_path, method: :delete
-    <br />
+    = render "shared/banner"
+
     - flash.each do | name, msg |
       = content_tag :div, msg, class: name
 
