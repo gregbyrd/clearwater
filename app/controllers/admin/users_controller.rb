@@ -64,7 +64,7 @@ class Admin::UsersController < ApplicationController
     if user
       authorize user
       if user.admin? && User.where(admin: true).count == 1
-        flash[:alert] = "Cannot delete the ONLY admin account!"
+        flash[:alert] = "Cannot delete the ONLY admin user!"
       else
         flash[:notice] = "User #{user.email} deleted."
         user.destroy
