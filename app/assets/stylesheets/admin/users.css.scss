@@ -10,13 +10,19 @@
     text-align: left;
   }
   .slots {
-    text-align: right;
+    text-align: center;
+  }
+  .used {
+    background-color: PaleGreen;
+    color: DarkGreen;
+  }
+  .full {
+    background-color: LightPink;
+    color: Red;
   }
   .link {
     background-color: transparent;
+    padding: 4px;
+    font-size: 85%;
   }
 }
-
-
-
-  

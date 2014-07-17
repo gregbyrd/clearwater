@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
       firstname || lastname || ''
     end
   end
+
+  def used
+    slots.count
+  end
   
 
 end

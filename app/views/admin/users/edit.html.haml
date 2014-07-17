@@ -16,9 +16,12 @@
   %p
     = label_tag :password, "Password"
     = text_field_tag :password, nil
-  %p
-    = label_tag :slots, "Slots"
-    = number_field_tag :slots, @user.purchased, size:4
+
+  -if !@user.admin?
+    %p
+      = label_tag :slots, "Slots"
+      = number_field_tag :slots, @user.purchased, size:4
+
   %p
     = submit_tag "Update"
 

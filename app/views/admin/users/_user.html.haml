@@ -4,8 +4,14 @@
   %td.phone= user.phone
   -if !user.admin?
     %td.slots= user.purchased
+    - if user.used < user.purchased
+      %td.slots.used= user.used
+    -else
+      %td.slots.used.full= user.used
   %td.link= link_to "Edit", edit_admin_user_path(user)
-  %td.link= link_to "Show", admin_user_path(user)
-  %td.link= link_to "Delete", admin_user_path(user), method: :delete,
-                              data: {confirm: "Deleting #{user.email} -- are you sure?"},
-                              id: "delete_#{user.id}"
+  - if !user.admin?
+    %td.link= link_to "Show", admin_user_path(user)
+  %td.link= link_to "Delete", admin_user_path(user), 
+              method: :delete,
+              data: {confirm: "Deleting #{user.email} -- are you sure?"},
+              id: "delete_#{user.id}"
