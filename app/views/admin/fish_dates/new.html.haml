@@ -2,13 +2,17 @@
 
 = form_tag admin_fish_dates_path, method: :post do
 
-  = select_month(current_season.start_date.month, use_short_month: true)
-  = select_day(1)
-  = select_year(current_season.year, 
-                start_year: current_season.year,
-                end_year: current_season.end_date.year)
+  %p
+    = select_month(current_season.start_date.month, use_short_month: true)
+    = select_day(1)
+    = select_year(current_season.year, 
+                  start_year: current_season.year,
+                  end_year: current_season.end_date.year)
 
-  %br/
-  %br/
-  = submit_tag "Add Date"
+  %p
+    = label_tag :slots, "Number of Slots"
+    = text_field_tag :slots, current_season.slot_limit, size: 4
+
+  %p
+    = submit_tag "Add Date"
 

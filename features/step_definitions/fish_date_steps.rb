@@ -22,3 +22,7 @@ Given /I specify date as test day/ do
   select(@test_day.day, from: "date_day")
   select(@test_day.year, from: "date_year")
 end
+
+Then /slot limit for test day should be (\d+)/ do |limit|
+  expect(FishDate.find_by_day(@test_day).slot_limit).to eq(limit.to_i)
+end

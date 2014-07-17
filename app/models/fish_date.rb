@@ -3,6 +3,7 @@ class FishDate < ActiveRecord::Base
   validates_presence_of :season_id
   has_many :slots
   validates_presence_of :day
+  validates_numericality_of :slot_limit
   validate :day_in_season?
   
 

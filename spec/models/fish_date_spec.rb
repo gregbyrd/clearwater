@@ -7,5 +7,6 @@ describe FishDate, :type => :model do
       expect(fd.valid?).to eq(false)
     end
     it { should belong_to(:season) }
+    it { should validate_numericality_of(:slot_limit) }
   end
 end

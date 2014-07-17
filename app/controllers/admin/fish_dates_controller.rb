@@ -18,6 +18,11 @@ class Admin::FishDatesController < ApplicationController
                    params[:date][:day].to_i)
     if day && day >= current_season.start_date && day <= current_season.end_date
       fdate.day = day
+      if params[:slots]
+        fdate.slot_limit = params[:slots]
+      else
+        fdate.slot_limit = current_season.slot_limit
+      end
       fdate.save!
       flash[:notice] = "Date added to current season."
       redirect_to admin_fish_dates_path
