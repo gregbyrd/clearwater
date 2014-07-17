@@ -1,0 +1,18 @@
+%h1 Create User
+
+= form_tag admin_users_path, method: :post do
+  %p
+    = label_tag :email, "Email"
+    = text_field_tag :email
+  %p
+    = label_tag :password, "Password"
+    = text_field_tag :password
+  %p
+    = label_tag :slots, "Slots"
+    = number_field_tag :slots, nil, size:4
+  %p
+    = check_box_tag :make_admin
+    = label_tag :make_admin, "Give admin privileges"
+  %p
+    = submit_tag "Create"
+

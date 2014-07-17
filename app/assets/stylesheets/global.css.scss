@@ -1,0 +1,55 @@
+$font-stack:  Helvetica, san-serif;
+$bkg-color:  #ffffee;
+$banner-color: #ffff80;
+$header-color: green;
+
+body {
+  font: 100% $font-stack;
+  background-color: $bkg-color;
+}
+
+h1 {
+  color: $header-color;
+}
+
+#banner {
+  background: $banner-color;
+  position: relative;
+}
+
+#banner #left {
+  float: left;
+  margin: 10px;
+}
+#banner #center {
+  padding: 25px;
+  font-size: 150%;
+  font-weight: bold;
+  color: $header-color;
+  text-align: center;
+}
+#banner #right {
+  float: right;
+  margin: 25px;
+}
+
+.notice {
+  border: 2px solid green;
+  background: #ccffcc;
+  clear: both;
+}
+
+.warning {
+  border: 2px solid red;
+  background: $bkg-color - 80;
+  clear: both;
+}
+
+.alert {
+  border: 2px solid red;
+  background: #ffcccc;
+  clear: both;
+}
+
+
+

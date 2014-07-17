@@ -35,5 +35,18 @@ Given /a current season/ do
   prop.save
 end
 
+Then /I find (.+) in Users/ do |email|
+  expect(User.find_by_email(email)).to_not eq(nil)
+end
+
+Then /(.+) is not admin/ do |email|
+  expect(User.find_by_email(email).admin?).to eq(false)
+end
+
+Then /(.+) is admin/ do |email|
+  expect(User.find_by_email(email).admin?).to eq(true)
+end
+
+
 
 
