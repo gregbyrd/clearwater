@@ -1,7 +1,9 @@
-%h1 Dates for season: #{current_season.year}
+%h1 Dates for season: #{@season.year}
 
-- @dates.each do |d|
-  = d.day.to_formatted_s(:long)
-  %br/
+= link_to "Add New Date", new_admin_fish_date_path
 
-%p= link_to "Add Date", new_admin_fish_date_path
+%h2 
+  Dates
+
+= render 'fish_dates_table', { fish_dates: @dates }
+

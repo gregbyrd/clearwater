@@ -3,12 +3,12 @@ class Admin::FishDatesController < ApplicationController
 
   def index
     authorize FishDate.new
-    @dates = FishDate.where(season: current_season)
+    @season = current_season
+    @dates = FishDate.where(season: @season)
   end
 
   def new
-    @newdate = FishDate.new
-    authorize @newdate
+    authorize FishDate.new
   end
 
   def create
@@ -30,6 +30,16 @@ class Admin::FishDatesController < ApplicationController
       flash[:alert] = "Date not within current season."
       redirect_to admin_fish_dates_path
     end
+  end
+
+  def destroy
+    fdate = FishDate.find(params[:id])
+    if fdate
+      authorize fdate
+      flash[:notice] = "Date #{fdate.day.to_s} deleted."
+      fdate.destroy
+    end
+    redirect_to admin_fish_dates_path
   end
 
 end
