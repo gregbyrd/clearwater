@@ -1,0 +1,11 @@
+%table.adminusers
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Phone
+      -if !admin
+        %th Slots
+  %tbody
+    = render users
+

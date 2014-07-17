@@ -1,5 +1,9 @@
-- if user.admin?
-  #{user.name} #{user.email} #{user.phone}
-- else
-  #{user.name} #{user.email} #(user.phone} #{user.purchased}
-
+%tr
+  %td.name= user.name
+  %td.email= user.email
+  %td.phone= user.phone
+  -if !user.admin?
+    %td.slots= user.purchased
+  %td.link= link_to "Edit", edit_admin_user_path(user)
+  %td.link= link_to "Show", admin_user_path(user)
+  %td.link= link_to "Delete", admin_user_path(user), method: :delete

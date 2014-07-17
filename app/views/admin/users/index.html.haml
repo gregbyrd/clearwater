@@ -3,12 +3,12 @@
 - if @admin_users
   %h2 
     Admin Users
-  = render @admin_users
+  = render 'users_table', { users: @admin_users, admin: true }
 
 - @seasons.each do |s|
   %h2
     Season: #{s.year}
-  = render s.users
+  = render 'users_table', { users: s.users, admin: false }
 
 
 
