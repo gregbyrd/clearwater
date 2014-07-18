@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :unauthorized
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   helper_method :current_user
   helper_method :current_season
@@ -26,7 +27,10 @@ class ApplicationController < ActionController::Base
   end
 
   def unauthorized
-    render nothing: true, status: 403
+    render nothing: true, status: :forbidden
+  end
+  def not_found
+    render nothing: true, status: :not_found
   end
 
   private

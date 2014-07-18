@@ -1,4 +1,7 @@
 class UserPolicy < ApplicationPolicy
+  def show?
+    user.admin? || user == record
+  end
   
   def create?
     user.admin?
@@ -9,7 +12,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin?
+    user.admin? || user == record
   end
 
   def destroy?

@@ -6,8 +6,16 @@ Given /the following users exist/ do |user_table|
                        password_confirmation: user[:password],
                        admin: user[:admin],
                        season: user[:season] || 
-                               Season.find(Properties.instance.current_season_id))
+                               Season.find(Properties.instance.current_season_id),
+                       purchased: user[:slots] || 8)
   end
+end
+
+Given /(.+) is logged in with password "(.+)"/ do |email, passwd|
+  visit path_to('the login page')
+  fill_in('email', :with => email)
+  fill_in('password', :with=> passwd)
+  click_button('Log in')
 end
 
 Given /I am logged in as admin/ do
@@ -71,6 +79,14 @@ end
 
 Then /test user (.+) should be (\d+)/ do |method, value|
   expect(@test_user.send(method)).to eq(value.to_i)
+end
+
+Then /I can find "(.+)" field/ do |field|
+  expect(find_field(field)).to_not eq(nil)
+end
+
+Then /I cannot find "(.+)" field/ do |field|
+  expect { find_field(field) }.to raise_error(Capybara::ElementNotFound)
 end
 
 

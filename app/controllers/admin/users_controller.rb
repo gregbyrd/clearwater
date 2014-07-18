@@ -32,17 +32,11 @@ class Admin::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    if @user
-      authorize @user
-      render :edit
-    else
-      render nothing: true, status: :not_found
-    end
+    authorize @user
   end
 
   def update
     user = User.find(params[:id])
-    head :internal_server_error if !user
 
     authorize user
     user.firstname = params[:firstname] if params[:firstname]
@@ -61,16 +55,12 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    if user
-      authorize user
-      if user.admin? && User.where(admin: true).count == 1
-        flash[:alert] = "Cannot delete the ONLY admin user!"
-      else
-        flash[:notice] = "User #{user.email} deleted."
-        user.destroy
-      end
+    authorize user
+    if user.admin? && User.where(admin: true).count == 1
+      flash[:alert] = "Cannot delete the ONLY admin user!"
     else
-      flash[:warning] = "DELETE: User not found."
+      flash[:notice] = "User #{user.email} deleted."
+      user.destroy
     end
     redirect_to admin_users_path
   end

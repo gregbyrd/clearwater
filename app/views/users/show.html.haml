@@ -1,1 +1,19 @@
-%h2  User Display Page
+%h2  User Info
+
+%p
+  Name: 
+  = @user.name || "No name given."
+
+%p
+  Email: #{@user.email}
+%p
+  Phone: 
+  = @user.phone || "No phone given."
+%p
+  Slots purchased: #{@user.purchased}
+%p
+  Slots reserved: #{@user.slots.count}
+%p
+  = button_to "Edit Profile", edit_user_path(@user), method: :get
+
+

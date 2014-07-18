@@ -26,6 +26,8 @@ module NavigationHelpers
       new_session_path
     when /^the User page for (.*)$/i
       user_path(User.find_by_email($1))
+    when /^the User Edit page for (.*)$/i
+      edit_user_path(User.find_by_email($1))
     when /^the Admin page$/
       admin_path
     when /^the admin edit page for (.+)$/i
