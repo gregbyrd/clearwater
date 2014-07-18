@@ -27,8 +27,17 @@ class Admin::SeasonsController < ApplicationController
     season.start_month = params[:date][:start_month].to_i
     season.end_month = params[:date][:end_month].to_i
     season.slot_limit = params[:slot_limit].to_i
-    season.save!
-    flash.notice = "Season #{season.year} created."
-    redirect_to admin_seasons_path
+    if season.save
+      flash.notice = "Season #{season.year} created."
+      redirect_to admin_seasons_path
+    else
+      flash.now[:warning] = "Unable to create season. "
+      season.errors.messages.each do | attr, msg |
+        season.errors.full_messages_for(attr).each do | m |
+          flash.now[:warning] << m
+        end
+      end
+      render :new
+    end
   end
 end

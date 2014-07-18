@@ -27,13 +27,20 @@ class Admin::FishDatesController < ApplicationController
       else
         fdate.slot_limit = current_season.slot_limit
       end
-      fdate.save!
-      flash[:notice] = "Date added to current season."
-      redirect_to admin_dates_path
+      if fdate.save
+        flash[:notice] = "Date added to current season."
+      else
+        flash[:warning] = "Unable to create date. "
+        fdate.errors.messages.each do | attr, msg |
+          fdate.errors.full_messages_for(attr).each do | m |
+            flash[:warning] << m
+          end
+        end
+      end
     else
       flash[:alert] = "Date not within current season."
-      redirect_to admin_dates_path
     end
+    redirect_to admin_dates_path
   end
 
   def destroy
