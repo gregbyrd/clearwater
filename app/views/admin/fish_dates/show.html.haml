@@ -1,0 +1,5 @@
+%h1 Slots for #{@date.day.to_s}
+
+= render partial: 'shared/slot_list', 
+  locals: { slots: @date.slots, limit: @date.slot_limit, show: :user }
+

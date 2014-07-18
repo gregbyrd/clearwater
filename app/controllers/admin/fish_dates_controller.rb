@@ -1,6 +1,10 @@
 class Admin::FishDatesController < ApplicationController
   before_filter :authenticate
 
+  def show
+    @date = FishDate.find(params[:id])
+  end
+
   def index
     authorize FishDate.new
     @season = current_season
