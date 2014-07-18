@@ -1,3 +1,29 @@
 // Place all the styles related to the admin/fish_dates controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.admindates {
+  border-spacing: 3px;
+  td, th {
+    padding: 4px 10px;
+    background-color: WhiteSmoke;
+    text-align: left;
+  }
+  .slots {
+    text-align: center;
+    width: 50px;
+  }
+  .used {
+    background-color: PaleGreen;
+    color: DarkGreen;
+  }
+  .full {
+    background-color: LightPink;
+    color: Red;
+  }
+  .link {
+    background-color: transparent;
+    padding: 4px;
+    font-size: 85%;
+  }
+}
