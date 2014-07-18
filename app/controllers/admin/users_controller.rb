@@ -25,9 +25,18 @@ class Admin::UsersController < ApplicationController
       user.purchased = params[:slots].to_i
       user.admin = false
     end
-    user.save!
-    flash[:notice] = "User #{params[:email]} created."
-    redirect_to admin_users_path      
+    if user.save
+      flash[:notice] = "User #{params[:email]} created."
+      redirect_to admin_users_path and return
+    else
+      flash.now[:warning] = "Unable to create user. "
+      user.errors.each do | attr, msg |
+        user.errors.full_messages_for(attr).each do | m |
+          flash.now[:warning] << m
+        end
+      end
+      render :new
+    end
   end
 
   def edit
