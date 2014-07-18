@@ -12,8 +12,16 @@
 %p
   Slots purchased: #{@user.purchased}
 %p
-  Slots reserved: #{@user.slots.count}
+  Slots reserved: #{@num_slots}
 %p
   = button_to "Edit Profile", edit_user_path(@user), method: :get
+
+%hr
+
+%h2 Your Slots
+
+= render partial: 'shared/slot_list', 
+  locals: { slots: @slots, limit: @user.purchased, show: :date }
+
 
 
