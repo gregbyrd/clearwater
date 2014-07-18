@@ -1,6 +1,6 @@
 %h1 Add new date to season: #{current_season.year}
 
-= form_tag admin_fish_dates_path, method: :post do
+= form_tag admin_dates_path, method: :post do
 
   %p
     = select_month(current_season.start_date.month, use_short_month: true)

@@ -29,10 +29,10 @@ class Admin::FishDatesController < ApplicationController
       end
       fdate.save!
       flash[:notice] = "Date added to current season."
-      redirect_to admin_fish_dates_path
+      redirect_to admin_dates_path
     else
       flash[:alert] = "Date not within current season."
-      redirect_to admin_fish_dates_path
+      redirect_to admin_dates_path
     end
   end
 
@@ -43,7 +43,7 @@ class Admin::FishDatesController < ApplicationController
       flash[:notice] = "Date #{fdate.day.to_s} deleted."
       fdate.destroy
     end
-    redirect_to admin_fish_dates_path
+    redirect_to admin_dates_path
   end
 
 end

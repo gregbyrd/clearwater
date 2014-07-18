@@ -6,8 +6,8 @@
   - else
     %td.slots.full= fish_date.slots.count
 
-  %td.link= link_to "Change Slot Limit", edit_admin_fish_date_path(fish_date)
-  %td.link= link_to "Delete", admin_fish_date_path(fish_date), 
+  %td.link= link_to "Change Slot Limit", edit_admin_date_path(fish_date)
+  %td.link= link_to "Delete", admin_date_path(fish_date), 
               method: :delete,
               data: {confirm: "Deleting #{fish_date.day.to_s} -- are you sure?"},
               id: "delete_#{fish_date.id}"
