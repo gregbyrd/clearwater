@@ -36,6 +36,8 @@ module NavigationHelpers
       new_admin_date_path
     when /^the admin dates page$/
       admin_dates_path
+    when /^the new reservation page for (.+)$/i
+      new_user_reservation_path(User.find_by_email($1))
 
     else
       begin

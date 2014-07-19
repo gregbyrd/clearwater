@@ -1,0 +1,16 @@
+
+%h2 Choose a user:
+
+= form_tag admin_date_reservations_path, method: :post do
+
+  - @users.each do |user|
+    - if !user.fully_booked? 
+      = radio_button_tag 'user', user.id
+
+  %p
+    = label_tag :num_slots, "Number of Slots"
+    = text_field_tag :num_slots
+  %p
+    = submit_tag "Request"
+
+

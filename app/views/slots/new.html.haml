@@ -1,2 +1,7 @@
-%h1 Slots#new
-%p Find me in app/views/slots/new.html.haml
+%h2 Make Reservation
+
+- if @display == :dates
+  = render 'choose_date_form'
+- else
+  = render 'choose_user_form'
+

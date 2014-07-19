@@ -1,0 +1,19 @@
+
+%h2 Choose a date:
+
+= form_tag user_reservations_path, method: :post do
+
+  - @dates.each do |date|
+    - if !date.fully_booked? 
+      = radio_button_tag 'fish_date', date.id
+      = date.day.strftime("%b %d, %Y (%A)") 
+      = ' -- Available slots: '
+      = date.available
+
+  %p
+    = label_tag :num_slots, "Number of Slots"
+    = text_field_tag :num_slots
+  %p
+    = submit_tag "Request"
+
+

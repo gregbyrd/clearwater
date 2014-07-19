@@ -1,13 +1,33 @@
 Given /the following users exist/ do |user_table|
   user_table.hashes.each do |user|
+    if user[:season]
+      season = Season.find_by_year(user[:season])
+    else
+      season = Season.find(Properties.instance.current_season_id)
+    end
     FactoryGirl.create(:user,
                        email: user[:email],
                        password: user[:password],
                        password_confirmation: user[:password],
                        admin: user[:admin],
-                       season: user[:season] || 
-                               Season.find(Properties.instance.current_season_id),
+                       season: season, 
                        purchased: user[:slots] || 8)
+  end
+end
+
+Given /the following seasons exist/ do |seasons|
+  seasons.hashes.each do |s|
+    FactoryGirl.create(:season, year: s[:year], slot_limit: s[:slots])
+  end
+end
+
+Given /the following dates exist/ do |dates|
+  dates.hashes.each do |d|
+    season = Season.find_by_year(d[:season])
+    FactoryGirl.create(:fish_date,
+                       day: Date.parse(d[:date]),
+                       season: season,
+                       slot_limit: season.slot_limit)
   end
 end
 
@@ -51,6 +71,17 @@ When /I follow the "(.+)" link for user (.+)/ do |link, email|
   user = User.find_by_email(email)
   linkid = "#{link.downcase}_#{user.id}"
   click_link(linkid)
+end
+
+When /I follow "(.+)"/ do |link|
+  click_link(link)
+end
+
+When /I choose the date "(.+)"/ do |daystr|
+  d = Date.parse(daystr)
+  fd = FishDate.find_by_day(d)
+  radio_id = "fish_date_#{fd.id}"
+  choose(radio_id)
 end
 
 Then /I find (.+) in Users/ do |email|

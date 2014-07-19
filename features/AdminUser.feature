@@ -16,7 +16,7 @@ Scenario: New user
   And I press "Create"
   Then I find newguy@tff.org in Users
   And newguy@tff.org is not admin
-  And I am on the admin users page
+  And I should be on the admin users page
 
 Scenario: New admin user
   Given I am on the new admin user page
