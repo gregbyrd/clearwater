@@ -1,17 +1,20 @@
 Clearwater::Application.routes.draw do
-
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   resource :session, only: [:new, :create, :destroy]
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update] do
+    resources :reservations, only: [:new, :create], controller: :slots
+  end
   get 'admin' => 'admin#show'
   namespace :admin do
     resources :seasons
-    resources :dates, controller: 'fish_dates'
+    resources :dates, controller: 'fish_dates' do
+      resources :reservations, only: [:new, :create], controller: :slots
+    end
     resources :users
   end
+  resource :reservation, only: [:destroy], controller: :slots
   root "sessions#new"
 
   # You can have the root of your site routed with "root"
