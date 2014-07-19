@@ -38,6 +38,8 @@ module NavigationHelpers
       admin_dates_path
     when /^the new reservation page for (.+)$/i
       new_user_reservation_path(User.find_by_email($1))
+    when /^the new labels page for (.+)$/i
+      reservations_setlabels_path(User.find_by_email($1))
 
     else
       begin

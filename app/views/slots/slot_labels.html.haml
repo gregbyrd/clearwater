@@ -1,0 +1,26 @@
+%h2 Slot Assignments
+
+%p
+  Please provide a name for each reserved slot. <br>
+  You can:
+%ul
+  %li Choose 'self' for yourself, 
+  %li Choose a guest from your previous guests (if any), or
+  %li Provide a new guest name (which will be added to your list).
+
+= form_tag reservations_setlabels_path, method: :patch do
+  - @slots.each do |s|
+    .chooselabel
+      = radio_button_tag "label_#{s.id}", 'self', true
+      Self <br>
+      = radio_button_tag "label_#{s.id}", 'select'
+      Choose a guest: 
+      = select_tag "label_#{s.id}_select", options_for_select(s.user.guests)
+      <br>
+      = radio_button_tag "label_#{s.id}", 'new'
+      = label_tag "label_new_#{s.id}", "Guest name: "
+      = text_field_tag "label_new_#{s.id}"
+
+  %p
+    = submit_tag "Submit"
+

@@ -6,10 +6,11 @@ class FishDate < ActiveRecord::Base
   validates_numericality_of :slot_limit
   validate :day_in_season?
 
-  def fully_booked?
-    slots.count >= slot_limit
+  def fully_booked?(force=false)
+    available(force) <= 0
   end
-  def available
+  def available(force=false)
+    reload if force
     slot_limit - slots.count
   end
 
