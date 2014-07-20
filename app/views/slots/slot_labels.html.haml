@@ -9,17 +9,17 @@
   %li Provide a new guest name (which will be added to your list).
 
 = form_tag reservations_setlabels_path, method: :patch do
-  - @slots.each do |s|
+  - @num_slots.times do |index|
     .chooselabel
-      = radio_button_tag "label_#{s.id}", 'self', true
+      = radio_button_tag "label_#{index}", 'self', true
       Self <br>
-      = radio_button_tag "label_#{s.id}", 'select'
+      = radio_button_tag "label_#{index}", 'select'
       Choose a guest: 
-      = select_tag "label_#{s.id}_select", options_for_select(s.user.guests)
+      = select_tag "label_#{index}_select", options_for_select(@user.guests)
       <br>
-      = radio_button_tag "label_#{s.id}", 'new'
-      = label_tag "label_new_#{s.id}", "Guest name: "
-      = text_field_tag "label_new_#{s.id}"
+      = radio_button_tag "label_#{index}", 'new'
+      = label_tag "label_new_#{index}", "Guest name: "
+      = text_field_tag "label_new_#{index}"
 
   %p
     = submit_tag "Submit"

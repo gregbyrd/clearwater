@@ -45,11 +45,7 @@ class SlotsController < ApplicationController
         session.delete(:reserve_slots)
         redirect_to new_user_reservation_path(@user) and return
       end
-      @slots = []
-      reserve_slots.times do
-        @slots << Slot.create!(user: @user, fish_date: @date,
-                               label: 'pending')
-      end
+      @num_slots = reserve_slots
       render :slot_labels and return
     else
       flash[:alert] = "Error during reservation.  Please try again."
@@ -71,26 +67,23 @@ class SlotsController < ApplicationController
     session.delete(:reserve_slots)
     if reserve_date
       date = FishDate.find(reserve_date) 
-      slots = Slot.where(user: user, fish_date: date, label: 'pending')
-    end
-    logger.warn "#{slots.count}, #{reserve_slots}"
-    if !reserve_date || slots.count != reserve_slots
+    else
       flash[:alert] = "Error during reservation.  Please try again."
       redirect_to new_user_reservation_path(user) and return
-    else
-      slots.each do |s|
-        case params["label_#{s.id}"]
-          when 'self'
-            s.label = 'self'
-          when 'select'
-            s.label = params["label_#{s.id}_select"]
-          when 'new'
-            guest = params["label_new_#{s.id}"]
-            s.label = guest
-            user.guests << guest
-        end
-        s.save
+    end
+    reserve_slots.times do |i|
+      label = ''
+      case params["label_#{i}"]
+      when 'self'
+        label = 'self'
+      when 'select'
+        label = params["label_#{i}_select"]
+      when 'new'
+        guest = params["label_new_#{i}"]
+        label = guest
+        user.guests << guest
       end
+      Slot.create!(user: user, fish_date: date, label: label)
     end
     redirect_to user_path(user)
   end
