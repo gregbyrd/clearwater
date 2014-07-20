@@ -71,6 +71,7 @@ class SlotsController < ApplicationController
       flash[:alert] = "Error during reservation.  Please try again."
       redirect_to new_user_reservation_path(user) and return
     end
+    new_guest = false
     reserve_slots.times do |i|
       label = ''
       case params["label_#{i}"]
@@ -82,8 +83,13 @@ class SlotsController < ApplicationController
         guest = params["label_new_#{i}"]
         label = guest
         user.guests << guest
+        new_guest = true
       end
       Slot.create!(user: user, fish_date: date, label: label)
+    end
+    if new_guest
+      user.guests.sort!
+      user.save
     end
     redirect_to user_path(user)
   end
