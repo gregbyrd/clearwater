@@ -26,9 +26,9 @@ class UsersController < ApplicationController
         redirect_to edit_user_path(user) and return
       end
     end
-    user.firstname = params[:firstname] if params[:firstname]
-    user.lastname = params[:lastname] if params[:lastname]
-    user.phone = params[:phone] if params[:phone]
+    user.firstname = params[:firstname] if params[:firstname] != user.firstname
+    user.lastname = params[:lastname] if params[:lastname] != user.lastname
+    user.phone = params[:phone] if params[:phone] != user.phone
     user.save!
     flash[:notice] = "Properties updated."
     redirect_to user_path(user)

@@ -28,9 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def fullname
-    if !@fullname || changed?
-      @fullname = create_name
-    end
+    @fullname = create_name
   end
 
   def create_name

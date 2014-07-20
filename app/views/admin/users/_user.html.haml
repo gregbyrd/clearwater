@@ -10,7 +10,7 @@
       %td.slots.used.full= user.used
   %td.link= link_to "Edit", edit_admin_user_path(user)
   - if !user.admin?
-    %td.link= link_to "Show", admin_user_path(user)
+    %td.link= link_to "Show", user_path(user)
   %td.link= link_to "Delete", admin_user_path(user), 
               method: :delete,
               data: {confirm: "Deleting #{user.email} -- are you sure?"},

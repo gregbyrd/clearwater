@@ -1,3 +1,65 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile {
+  position: relative;
+  margin: 15px 60px 10px;
+  border-style: solid;
+  border-width: 2px;
+  width: 410px;
+  height: 80px;
+  div {
+    height: 1.2em;
+    padding: 5px;
+  }
+  .name { 
+    font-weight: bold; 
+    font-size: 110%; 
+    position: absolute;
+    left: 0;
+    width: 400px;
+    background-color: LightGrey;
+  }
+  .email {
+    position: absolute;
+    left: 0;
+    top: 30px;
+    width: 200px;
+  }
+  .phone {
+    position: absolute;
+    left: 0;
+    top: 55px;
+    width: 200px;
+  }
+  .purchased {
+    position: absolute;
+    left: 200px;
+    top: 30px;
+    width: 200px;
+    text-align: right;
+  }
+  .reserved {
+    position: absolute;
+    left: 200px;
+    width: 200px;
+    top: 55px;
+    text-align: right;
+  }
+  .purchased:before { content: "Slots purchased: " }
+  .reserved:before { content: "Slots reserved: " }
+}
+.missing {
+  color: red;
+  font-style: italic;
+  margin: 0px;
+}
+.edit { 
+  margin: 5px 60px;
+}
+.request {
+  margin: 3px 60px;
+  padding: 0px 10px;
+  font-size: 75%;
+}

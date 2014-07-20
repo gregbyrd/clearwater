@@ -1,19 +1,30 @@
 %h2  User Info
 
-%p
-  Name: 
-  = @user.name || "No name given."
+.profile
+  .name
+    - if @user.fullname != (nil || '')
+      = @user.fullname
+    - else
+      %span.missing
+        No name given
+  .email
+    = @user.email
+  .purchased
+    = @user.purchased
+  .phone
+    - if @user.phone != (nil || '')
+      = @user.phone 
+    - else
+      %span.missing
+        No phone given
+  .reserved
+    = @num_slots
 
-%p
-  Email: #{@user.email}
-%p
-  Phone: 
-  = @user.phone || "No phone given."
-%p
-  Slots purchased: #{@user.purchased}
-%p
-  Slots reserved: #{@num_slots}
-%p
+- if @user.fullname == (nil || '') || @user.phone == (nil || '')
+  .request
+    %span.missing 
+      * Please provide name and phone number.
+.edit
   = button_to "Edit Profile", edit_user_path(@user), method: :get
 
 %hr
