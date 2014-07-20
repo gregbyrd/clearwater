@@ -1,10 +1,15 @@
 class SlotsController < ApplicationController
   before_filter :authenticate
+  def user_authorized?
+    current_user.admin || params[:user_id].to_i == session[:user_id]
+  end
+    
+    
   def new
     # check authorization manually
-#    if params[:user_id] != session[:user_id]
-#      raise Pundit::NotAuthorizedError
-#    end
+    if !user_authorized?
+      raise Pundit::NotAuthorizedError
+    end
     @user = User.find(params[:user_id])
     @display = :dates
     @dates = FishDate.where(season: current_season)
@@ -12,6 +17,10 @@ class SlotsController < ApplicationController
 
   def create
     user = User.find(params[:user_id])
+    # check authorization manually
+    if !user_authorized?
+      raise Pundit::NotAuthorizedError
+    end
     session[:reserve_date] = params[:fish_date]
     session[:reserve_slots] = params[:num_slots]
     redirect_to reservations_newlabels_path(user)
@@ -22,6 +31,10 @@ class SlotsController < ApplicationController
 
   def newlabels
     @user = User.find(params[:user_id])
+    # check authorization manually
+    if !user_authorized?
+      raise Pundit::NotAuthorizedError
+    end
     reserve_date = session[:reserve_date]
     reserve_slots = session[:reserve_slots].to_i
     if reserve_date && reserve_slots
@@ -48,12 +61,23 @@ class SlotsController < ApplicationController
 
   def setlabels
     user = User.find(params[:user_id])
+    # check authorization manually
+    if !user_authorized?
+      raise Pundit::NotAuthorizedError
+    end
     reserve_date = session[:reserve_date]
+    reserve_slots = session[:reserve_slots].to_i
     session.delete(:reserve_date)
     session.delete(:reserve_slots)
     if reserve_date
-      date = FishDate.find(reserve_date)
+      date = FishDate.find(reserve_date) 
       slots = Slot.where(user: user, fish_date: date, label: 'pending')
+    end
+    logger.warn "#{slots.count}, #{reserve_slots}"
+    if !reserve_date || slots.count != reserve_slots
+      flash[:alert] = "Error during reservation.  Please try again."
+      redirect_to new_user_reservation_path(user) and return
+    else
       slots.each do |s|
         case params["label_#{s.id}"]
           when 'self'
@@ -66,9 +90,6 @@ class SlotsController < ApplicationController
             user.guests << guest
         end
       end
-    else
-      flash[:alert] = "Error during reservation.  Please try again."
-      redirect_to new_user_reservation_path(user) and return
     end
     redirect_to user_path(user)
   end
