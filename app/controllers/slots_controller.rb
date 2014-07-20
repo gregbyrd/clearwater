@@ -89,6 +89,7 @@ class SlotsController < ApplicationController
             s.label = guest
             user.guests << guest
         end
+        s.save
       end
     end
     redirect_to user_path(user)

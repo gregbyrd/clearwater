@@ -14,6 +14,16 @@ class FishDate < ActiveRecord::Base
     slot_limit - slots.count
   end
 
+  def print_num
+    day.to_s
+  end
+  def print_full
+    day.strftime("%b %-d, %Y (%A)")
+  end
+  def print_short
+    day.strftime("%b %-d")
+  end
+
   def day_in_season?
     if (season && !season.in_season?(day))
       errors.add(:day, 'must be a valid date') 

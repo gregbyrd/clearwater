@@ -1,6 +1,5 @@
 -# @slots is collection of non-empty slots (may be nil)
 -# @limit is number of slots allowed for this list
--# @show is display option -- :all (default), :date, :user
 
 - count = 0
 - count = slots.count if @slots
@@ -10,14 +9,11 @@
   - if slots
     - slots.each do |s|
       %tr
-        - if show.in? [:all, :date]
-          %td.date= s.fish_date.day.to_s
-        - if show.in? [:all, :user]
-          %td.owner= s.owner
+        %td.owner= s.owner
 
   - (limit - count).times do
     %tr
-      %td.empty &lt; empty &gt;
+      %td.empty Not filled
 
 
         

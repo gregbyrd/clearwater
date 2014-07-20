@@ -1,0 +1,21 @@
+-# @slots is collection of non-empty slots (may be nil)
+-# @limit is number of slots allowed for this list
+
+- count = 0
+- count = slots.count if @slots
+
+%table.slotslist
+
+  - if slots
+    - slots.each do |s|
+      %tr
+        %td.date= s.fish_date.print_full
+        -if s.label != 'self'
+          %td.guest= "(#{s.label})"
+
+  - (limit - count).times do
+    %tr
+      %td.empty Unused
+
+
+        

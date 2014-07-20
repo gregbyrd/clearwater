@@ -1,3 +1,22 @@
 // Place all the styles related to the slots controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.chooselabel {
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  margin: 20px 0px;
+  padding: 10px;
+}
+
+.slotslist {
+  th, td {
+    padding: 3px;
+  }
+  .empty {
+    color: blue;
+    font-style: italic;
+  }
+}
+

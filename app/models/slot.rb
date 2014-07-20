@@ -8,12 +8,18 @@ class Slot < ActiveRecord::Base
       ''
     else
       namestr = user.name
-      namestr = user.email if namestr == ''
       if label == "self"
         namestr
       else
         label + ' (Guest of: ' + namestr + ')'
       end
+    end
+  end
+  def guest
+    if !user || label == 'self'
+      ''
+    else
+      label
     end
   end
 

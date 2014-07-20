@@ -20,8 +20,8 @@
 
 %h2 Your Reservations
 
-= render partial: 'shared/slot_list', 
-  locals: { slots: @slots, limit: @user.purchased, show: :date }
+= render partial: 'shared/user_slot_list', 
+  locals: { slots: @slots, limit: @user.purchased }
 
 %p
   = link_to "Make Reservation", new_user_reservation_path(@user)
