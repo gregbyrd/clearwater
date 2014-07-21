@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     authorize @user
-    @slots = @user.slots
+    @slots = @user.slots.sort_by {|s| s.fish_date.day }
     @num_slots = @user.slots.count
   end
 
