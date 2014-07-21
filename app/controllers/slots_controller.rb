@@ -1,7 +1,7 @@
 class SlotsController < ApplicationController
   before_filter :authenticate
   def user_authorized?
-    current_user.admin || params[:user_id].to_i == session[:user_id]
+    params[:user_id].to_i == session[:user_id] || current_user.admin
   end
     
     
@@ -24,9 +24,6 @@ class SlotsController < ApplicationController
     session[:reserve_date] = params[:fish_date]
     session[:reserve_slots] = params[:num_slots]
     redirect_to reservations_newlabels_path(user)
-  end
-
-  def destroy
   end
 
   def newlabels
@@ -91,6 +88,10 @@ class SlotsController < ApplicationController
       user.guests.sort!
       user.save
     end
-    redirect_to user_path(user)
+    if user == current_user
+      redirect_to user_path(user)
+    else
+      redirect_to admin_date_path(date)
+    end
   end
 end

@@ -11,7 +11,7 @@
   - @users.each do |user|
     - if !user.fully_booked? 
       = radio_button_tag 'user', user.id
-      #{user.name} -- Available slots: #[user.available}
+      #{user.name} -- Available slots: #{user.available}
       %br/
 
   %p

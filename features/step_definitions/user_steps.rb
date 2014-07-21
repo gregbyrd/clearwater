@@ -5,8 +5,14 @@ Given /the following users exist/ do |user_table|
     else
       season = Season.find(Properties.instance.current_season_id)
     end
+    first, last = nil
+    if user[:name]
+      first, last = user[:name].split(' ')
+    end
     FactoryGirl.create(:user,
                        email: user[:email],
+                       firstname: first,
+                       lastname: last,
                        password: user[:password],
                        password_confirmation: user[:password],
                        admin: user[:admin],
@@ -21,15 +27,15 @@ Given /the following seasons exist/ do |seasons|
   end
 end
 
-Given /the following dates exist/ do |dates|
-  dates.hashes.each do |d|
-    season = Season.find_by_year(d[:season])
-    FactoryGirl.create(:fish_date,
-                       day: Date.parse(d[:date]),
-                       season: season,
-                       slot_limit: season.slot_limit)
-  end
-end
+#Given /the following dates exist/ do |dates|
+#  dates.hashes.each do |d|
+#    season = Season.find_by_year(d[:season])
+#    FactoryGirl.create(:fish_date,
+#                       day: Date.parse(d[:date]),
+#                       season: season,
+#                       slot_limit: season.slot_limit)
+#  end
+#end
 
 Given /(.+) is logged in with password "(.+)"/ do |email, passwd|
   visit path_to('the login page')

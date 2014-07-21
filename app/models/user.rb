@@ -42,6 +42,9 @@ class User < ActiveRecord::Base
   def used
     slots.count
   end
+  def available
+    purchased - slots.count
+  end
 
   def fully_booked?
     slots.count >= purchased

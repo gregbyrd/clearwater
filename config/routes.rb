@@ -14,11 +14,12 @@ Clearwater::Application.routes.draw do
   namespace :admin do
     resources :seasons
     resources :dates, controller: 'fish_dates' do
-      #resources :reservations, only: [:new, :create], controller: :slots
+      resources :reservations, only: [:new, :create], controller: :slots   
     end
-    resources :users
+    resources :reservations, only: [:edit, :update, :destroy], controller: :slots   
+ resources :users
+
   end
-  resource :reservation, only: [:destroy], controller: :slots
 
   root "sessions#new"
 

@@ -3,3 +3,5 @@
 = render partial: 'shared/date_slot_list', 
   locals: { slots: @date.slots, limit: @date.slot_limit }
 
+= link_to "Make Reservation", new_admin_date_reservation_path(@date)
+

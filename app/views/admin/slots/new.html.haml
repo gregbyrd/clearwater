@@ -1,0 +1,7 @@
+%h2 Make Reservation
+
+- if @display == :dates
+  = render 'choose_date_form'
+- else
+  = render 'choose_user_form'
+

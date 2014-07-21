@@ -25,6 +25,7 @@ Scenario: Fulfill a reservation
   Then I should be on the new labels page for yogi@jellystone.gov
   When I press "Submit"
   Then I should be on the User page for yogi@jellystone.gov
+  And show me the page
   And I should see "Slots reserved: 1"
 
 
