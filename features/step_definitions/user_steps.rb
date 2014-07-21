@@ -8,16 +8,24 @@ Given /the following users exist/ do |user_table|
     first, last = nil
     if user[:name]
       first, last = user[:name].split(' ')
+      FactoryGirl.create(:user,
+                         email: user[:email],
+                         firstname: first,
+                         lastname: last,
+                         password: user[:password],
+                         password_confirmation: user[:password],
+                         admin: user[:admin],
+                         season: season, 
+                         purchased: user[:slots] || 8)
+    else
+      FactoryGirl.create(:user,
+                         email: user[:email],
+                         password: user[:password],
+                         password_confirmation: user[:password],
+                         admin: user[:admin],
+                         season: season, 
+                         purchased: user[:slots] || 8)
     end
-    FactoryGirl.create(:user,
-                       email: user[:email],
-                       firstname: first,
-                       lastname: last,
-                       password: user[:password],
-                       password_confirmation: user[:password],
-                       admin: user[:admin],
-                       season: season, 
-                       purchased: user[:slots] || 8)
   end
 end
 

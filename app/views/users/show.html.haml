@@ -10,7 +10,7 @@
   .email
     = @user.email
   .purchased
-    = @user.purchased
+    Slots purchased: #{@user.purchased}
   .phone
     - if @user.phone != (nil || '')
       = @user.phone 
@@ -18,7 +18,7 @@
       %span.missing
         No phone given
   .reserved
-    = @num_slots
+    Slots reserved: #{@num_slots}
 
 - if @user.fullname == (nil || '') || @user.phone == (nil || '')
   .request
@@ -34,7 +34,7 @@
 = render partial: 'shared/user_slot_list', 
   locals: { slots: @slots, limit: @user.purchased }
 
-- if @num_slots < @user.slots.count
+- if @user.available > 0
   %p
     = link_to "Make Reservation", new_user_reservation_path(@user)
 

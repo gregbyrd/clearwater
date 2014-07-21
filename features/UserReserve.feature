@@ -13,6 +13,7 @@ Background:
 
 Scenario: Route to reservation page
   Given yogi@jellystone.gov is logged in with password "booboo"
+  And show me the page
   When I follow "Make Reservation"
   Then I should be on the new reservation page for yogi@jellystone.gov
 
@@ -25,7 +26,6 @@ Scenario: Fulfill a reservation
   Then I should be on the new labels page for yogi@jellystone.gov
   When I press "Submit"
   Then I should be on the User page for yogi@jellystone.gov
-  And show me the page
   And I should see "Slots reserved: 1"
 
 
