@@ -34,6 +34,7 @@
 = render partial: 'shared/user_slot_list', 
   locals: { slots: @slots, limit: @user.purchased }
 
-%p
-  = link_to "Make Reservation", new_user_reservation_path(@user)
+- if @num_slots < @user.slots.count
+  %p
+    = link_to "Make Reservation", new_user_reservation_path(@user)
 

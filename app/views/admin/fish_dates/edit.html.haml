@@ -1,0 +1,8 @@
+%h1 Change slot limit for #{@date.print_short}
+
+= form_tag admin_date_path(@date), method: :patch do
+  = label_tag :slot_limit, "Number of slots:"
+  = text_field_tag :slot_limit, @date.slot_limit
+
+  = submit_tag "Change Limit"
+

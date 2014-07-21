@@ -43,6 +43,29 @@ class Admin::FishDatesController < ApplicationController
     redirect_to admin_dates_path
   end
 
+  def edit
+    @date = FishDate.find(params[:id])
+    authorize @date
+  end
+
+  def update
+    fdate = FishDate.find(params[:id])
+    authorize fdate
+    new_limit = params[:slot_limit].to_i
+    if new_limit && new_limit != fdate.slot_limit
+      slot_count = fdate.slots.count
+      if new_limit >= slot_count
+        fdate.slot_limit = new_limit
+      else
+        # if new limit is smaller than the number of slots...
+        fdate.slot_limit = slot_count
+        flash[:warning] = "Cannot reduce slots below number of existing reservations."
+      end
+      fdate.save
+    end
+    redirect_to admin_dates_path
+  end
+
   def destroy
     fdate = FishDate.find(params[:id])
     if fdate
