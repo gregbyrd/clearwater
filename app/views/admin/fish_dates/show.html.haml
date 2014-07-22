@@ -1,6 +1,6 @@
 %h1 Slots for #{@date.print_short}
 
-= render partial: 'shared/date_slot_list', 
+= render partial: 'date_slot_list', 
   locals: { slots: @date.slots, limit: @date.slot_limit }
 
 = link_to "Make Reservation", new_admin_date_reservation_path(@date)

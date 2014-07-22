@@ -11,3 +11,7 @@ Given /the following dates exist/ do |date_table|
                        slot_limit: date[:slots] || 8)
   end
 end
+
+Given /test date is (.+)/ do |date|
+  @test_date = FishDate.find_by_day(date)
+end

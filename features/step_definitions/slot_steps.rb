@@ -23,3 +23,8 @@ end
 When /I choose admin/ do 
   choose("user_admin")
 end
+
+When /I click on "Change Name" for "(.+)"/ do |name|
+  slot = Slot.where(fish_date_id: @test_date.id, label: name).first
+  click_link("change_name_#{slot.id}")
+end

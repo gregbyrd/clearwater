@@ -1,0 +1,22 @@
+%h2 Edit reservation name 
+
+%p Date: #{@date.print_full}
+%p User: #{@user.name}
+
+%p
+  You can:
+%ul
+  %li Choose 'self' for the user's name.
+  %li Provide a guest name.
+
+= form_tag admin_reservation_path(@slot), method: :patch do
+  .chooselabel
+    = radio_button_tag "newlabel", 'self', true
+    Self <br>
+    = radio_button_tag "newlabel", 'new'
+    = label_tag "newlabel_guest", "Guest name: "
+    = text_field_tag "newlabel_guest"
+
+  %p
+    = submit_tag "Submit"
+

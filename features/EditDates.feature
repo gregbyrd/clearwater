@@ -47,3 +47,13 @@ Scenario: Add an admin reservation for date
   And I should see "Roger Waters (Guest of: John Doe)"
   And I should see "David Gilmour (Guest of: John Doe)"
 
+Scenario: Change name on a reservation
+  Given I am on the admin date page for 2014-10-10
+  And test date is 2014-10-10
+  And I click on "Change Name" for "Guest2"
+  When I choose button for "newlabel_new"
+  And I fill in "Guest" with "Yogi Bear"
+  And I press "Submit"
+  Then I should be on the admin date page for 2014-10-10
+  And I should see "Yogi Bear (Guest of: John Doe)"
+

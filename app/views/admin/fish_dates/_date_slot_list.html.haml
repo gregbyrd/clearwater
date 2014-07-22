@@ -1,0 +1,22 @@
+-# @slots is collection of non-empty slots (may be nil)
+-# @limit is number of slots allowed for this list
+
+- count = 0
+- count = slots.count if @slots
+
+%table.slotslist
+
+  - if slots
+    - slots.each do |s|
+      %tr
+        %td.owner= s.owner
+        %td.change
+          = link_to "Change Name", edit_admin_reservation_path(s),
+                    id: "change_name_#{s.id}"
+
+  - (limit - count).times do
+    %tr
+      %td.empty Not filled
+
+
+        
