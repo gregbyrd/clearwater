@@ -15,7 +15,7 @@
       Self <br>
       = radio_button_tag "label_#{index}", 'select'
       Choose a guest: 
-      = select_tag "label_#{index}_select", options_for_select(@user.guests)
+      = select_tag "label_select_#{index}", options_for_select(@user.guests)
       <br>
       = radio_button_tag "label_#{index}", 'new'
       = label_tag "label_new_#{index}", "Guest name: "

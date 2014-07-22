@@ -21,7 +21,7 @@ Background:
   | 2014-11-01 | user1@gmail.com |        |
 
 
-Scenario: Add a new date
+Scenario: Add a new reservation for date
   Given I am on the admin date page for 2014-10-10
   And I follow "Make Reservation"
   And I choose user user2@gmail.com
@@ -31,4 +31,19 @@ Scenario: Add a new date
   When I press "Submit"
   Then I should be on the admin date page for 2014-10-10
   And I should see "Jane Smith"
+
+Scenario: Add an admin reservation for date
+  Given I am on the admin date page for 2014-10-10
+  And I follow "Make Reservation"
+  And I fill in "Slots" with "2"
+  And I press "Submit"
+  Then I should be on the new labels page for jd@gmail.com
+  When I choose button for "label_0_new"
+  And I fill in "label_new_0" with "Roger Waters"
+  And I choose button for "label_1_new"
+  And I fill in "label_new_1" with "David Gilmour"
+  And I press "Submit"
+  Then I should be on the admin date page for 2014-10-10
+  And I should see "Roger Waters (Guest of: John Doe)"
+  And I should see "David Gilmour (Guest of: John Doe)"
 

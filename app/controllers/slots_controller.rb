@@ -75,7 +75,7 @@ class SlotsController < ApplicationController
       when 'self'
         label = 'self'
       when 'select'
-        label = params["label_#{i}_select"]
+        label = params["label_select_#{i}"]
       when 'new'
         guest = params["label_new_#{i}"]
         label = guest
@@ -88,7 +88,7 @@ class SlotsController < ApplicationController
       user.guests.sort!
       user.save
     end
-    if user == current_user
+    if !user.admin && user == current_user
       redirect_to user_path(user)
     else
       redirect_to admin_date_path(date)

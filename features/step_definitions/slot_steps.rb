@@ -15,3 +15,11 @@ When /I choose user (.+)/ do |email|
   radio_id = "user_#{u.id}"
   choose(radio_id)
 end
+
+When /I choose button for "(.+)"/ do |label|
+  choose(label)
+end
+
+When /I choose admin/ do 
+  choose("user_admin")
+end
