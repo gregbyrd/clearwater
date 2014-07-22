@@ -13,7 +13,6 @@ Background:
 
 Scenario: Route to reservation page
   Given yogi@jellystone.gov is logged in with password "booboo"
-  And show me the page
   When I follow "Make Reservation"
   Then I should be on the new reservation page for yogi@jellystone.gov
 
