@@ -60,5 +60,14 @@ class Admin::SlotsController < ApplicationController
     end
     redirect_to admin_date_path(slot.fish_date)
   end
-    
+  def destroy
+    # check authorization manually
+    if !user_authorized?
+      raise Pundit::NotAuthorizedError
+    end
+    slot = Slot.find(params[:id])
+    date = slot.fish_date
+    slot.destroy
+    redirect_to admin_date_path(date)
+  end
 end

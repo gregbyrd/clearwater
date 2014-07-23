@@ -13,6 +13,10 @@
         %td.change
           = link_to "Change Name", edit_admin_reservation_path(s),
                     id: "change_name_#{s.id}"
+        %td.delete
+          = link_to "Delete", admin_reservation_path(s),
+                    data: {confirm: 'Deleting reservation -- are you sure?'},
+                    id: "delete_#{s.id}", method: :delete
 
   - (limit - count).times do
     %tr

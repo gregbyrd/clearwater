@@ -57,3 +57,10 @@ Scenario: Change name on a reservation
   Then I should be on the admin date page for 2014-10-10
   And I should see "Yogi Bear (Guest of: John Doe)"
 
+Scenario: Delete reservation
+  Given I am on the admin date page for 2014-10-10
+  And test date is 2014-10-10
+  And I click on "Delete" for "Guest2"
+  Then I should be on the admin date page for 2014-10-10
+  And I should not see "Guest2"
+
