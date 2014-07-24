@@ -13,13 +13,20 @@ class Admin::FishDatesController < ApplicationController
 
   def new
     authorize FishDate.new
+    @start_date = current_season.start_date
+    @end_date = current_season.end_date
+    @last_date = FishDate.where(season: current_season).order(day: :desc).first.day
   end
 
   def create
     fdate = FishDate.new(season: current_season)
     authorize fdate
-    day = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 
-                   params[:date][:day].to_i)
+    if params[:datestr]
+      day = Date.strptime(params[:datestr], '%Y-%m-%d')
+    else
+      day = Date.new(params[:date][:year].to_i, params[:date][:month].to_i, 
+                     params[:date][:day].to_i)
+    end
     if day && day >= current_season.start_date && day <= current_season.end_date
       fdate.day = day
       if params[:slots]

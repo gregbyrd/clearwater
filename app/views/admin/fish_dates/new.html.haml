@@ -2,12 +2,13 @@
 
 = form_tag admin_dates_path, method: :post do
 
-  %p
-    = select_month(current_season.start_date.month, use_short_month: true)
+  #newdate{data: {min_date: @start_date, max_date: @end_date,
+                  default_date: @last_date}}
+    = select_month(@start_date.month, use_short_month: true)
     = select_day(1)
-    = select_year(current_season.year, 
-                  start_year: current_season.year,
-                  end_year: current_season.end_date.year)
+    = select_year(@start_date.year,
+                  start_year: @start_date.year,
+                  end_year: @end_date.year)
 
   %p
     = label_tag :slots, "Number of Slots"
