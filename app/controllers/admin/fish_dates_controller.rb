@@ -15,7 +15,8 @@ class Admin::FishDatesController < ApplicationController
     authorize FishDate.new
     @start_date = current_season.start_date
     @end_date = current_season.end_date
-    @last_date = FishDate.where(season: current_season).order(day: :desc).first.day
+    latest = FishDate.where(season: current_season).order(day: :desc).first
+    @last_date = latest.day if latest
   end
 
   def create
