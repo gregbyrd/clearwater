@@ -19,6 +19,7 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+      session[:season_id] = user.season.id unless user.admin?
       flash[:notice] = 'Successful sign in.'
       if user.admin?
         redirect_to admin_path
