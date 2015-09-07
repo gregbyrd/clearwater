@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 set_date = (text, picker) ->
-  alert("setting date to #{text}")
   $('#datestr').val(text)
 
 AddDate =
