@@ -40,4 +40,30 @@ class Admin::SeasonsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @season = Season.find(params[:id])
+    if @season 
+      if @season.id == current_season.id
+        flash.now[:warning] = "Cannot destroy current season."
+        redirect_to admin_seasons_path
+      else
+        year = @season.year
+        users = @season.users
+        dates = @season.fish_dates
+        users.each do |u|
+          u.destroy
+        end
+        dates.each do |d|
+          d.destroy
+        end
+        @season.destroy
+        flash.notice = "Season #{year} deleted."
+        redirect_to admin_seasons_path
+      end
+    else
+      flash.now[:warning] = "ERROR: no such season -- cannot destroy."
+      redirect_to admin_seasons_path
+    end
+  end
 end
