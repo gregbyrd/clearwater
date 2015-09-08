@@ -1,17 +1,22 @@
 %h1 Seasons
 
+= debug(Properties.instance.current_season_id)
+= debug(@current)
 
 = div_for(@seasons) do |season|
   #{season.year}: #{season.start_date.strftime('%b \'%y')} - #{season.end_date.strftime('%b \'%y')}
   =link_to "Show", admin_season_path(season)
-  -if season.id == current_season.id
-    [CURRENT]
+  -if current_season() && season.id == current_season().id
+    %b [CURRENT]
   -else
     =link_to "Delete", admin_season_path(season), 
               method: :delete,
               data: {confirm: "Deleting Season #{season.year} -- are you sure?"},
               id: "delete_#{season.id}"
-    Set as Current
+    =link_to "Set as Current", admin_season_path(season),
+              method: :put,
+              id: "put_#{season.id}"
+
 
 %br
 =link_to "Add New Season", new_admin_season_path

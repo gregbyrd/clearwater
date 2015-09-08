@@ -5,12 +5,6 @@
 
 class Properties < ActiveRecord::Base
   include ActiveRecord::Singleton
-
-  def current_season_id
-    @current_season_id
-  end
-  def set_current_season_id(id)
-    @current_season_id = id
-  end
+  # attribute is current_season_id
 
 end

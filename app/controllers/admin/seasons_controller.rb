@@ -4,6 +4,7 @@ class Admin::SeasonsController < ApplicationController
   def index
     authorize Season.new
     @seasons = Season.all
+    @current = find_current_season()
   end
 
   def show
@@ -39,6 +40,12 @@ class Admin::SeasonsController < ApplicationController
       end
       render :new
     end
+  end
+
+  def update
+    Properties.instance.update_attribute(:current_season_id, params[:id])
+    session[:season_id] = nil if session[:season_id]
+    redirect_to admin_seasons_path
   end
 
   def destroy
