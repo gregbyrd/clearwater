@@ -12,8 +12,12 @@ class Admin::SeasonsController < ApplicationController
     if @season
       authorize @season
       @dates = @season.fish_dates
+      @users = @season.users
+      @is_current = @season.id == current_season.id
     else
       @dates = nil
+      @users = nil
+      @is_current = nil
     end
   end
 

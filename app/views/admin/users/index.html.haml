@@ -1,18 +1,19 @@
-%h1 Users
+%h1 All Users 
 
 = link_to "Add New User", new_admin_user_path
+(to current season: #{@current.name})
 %br
 = link_to "Admin Home", admin_path
 
 - if @admin_users
   %h2 
     Admin Users
-  = render 'users_table', { users: @admin_users, admin: true }
+  = render 'users_table', { users: @admin_users, admin: true, in_current: false }
 
 - @seasons.each do |s|
   %h2
     Season: #{s.year}
-  = render 'users_table', { users: s.users, admin: false }
+  = render 'users_table', { users: s.users, admin: false , in_current: @current.id == s.id }
 
 
 

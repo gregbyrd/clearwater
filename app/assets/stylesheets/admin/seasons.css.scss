@@ -1,3 +1,22 @@
 // Place all the styles related to the admin/seasons controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.adminseasons {
+  border-spacing: 3px;
+  td, th {
+    padding: 4px 10px;
+    background-color: WhiteSmoke;
+    text-align: left;
+  }
+  .link {
+    background-color: transparent;
+    padding: 4px;
+    font-size: 85%;
+  }
+  .current {
+    font-size: 85%;
+    fond-weight: bold;
+    background-color: transparent;
+  }
+}

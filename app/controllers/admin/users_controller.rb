@@ -5,6 +5,7 @@ class Admin::UsersController < ApplicationController
     authorize User.new
     @admin_users = User.where(admin: true)
     @seasons = Season.all.sort {|a,b| b.year <=> a.year }
+    @current = current_season
 
   end
 

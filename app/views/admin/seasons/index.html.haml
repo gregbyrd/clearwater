@@ -1,18 +1,21 @@
 %h1 Seasons
 
-= div_for(@seasons) do |season|
-  #{season.year}: #{season.start_date.strftime('%b \'%y')} - #{season.end_date.strftime('%b \'%y')}
-  =link_to "Show", admin_season_path(season)
-  -if current_season() && season.id == current_season().id
-    %b [CURRENT]
-  -else
-    =link_to "Delete", admin_season_path(season), 
-              method: :delete,
-              data: {confirm: "Deleting Season #{season.year} -- are you sure?"},
-              id: "delete_#{season.id}"
-    =link_to "Set as Current", admin_season_path(season),
-              method: :put,
-              id: "put_#{season.id}"
+%table.adminseasons
+  %tbody
+  = div_for(@seasons) do |season|
+    %tr
+      %td #{season.year}: #{season.start_date.strftime('%b \'%y')} - #{season.end_date.strftime('%b \'%y')}
+      %td.link= link_to "Show", admin_season_path(season)
+      -if current_season() && season.id == current_season().id
+        %td.current(colspan="2") [CURRENT]
+      -else
+        %td.link= link_to "Delete", admin_season_path(season), 
+                  method: :delete,
+                  data: {confirm: "Deleting Season #{season.year} -- are you sure?"},
+                  id: "delete_#{season.id}"
+        %td.link= link_to "Set as Current", admin_season_path(season),
+                  method: :put,
+                  id: "put_#{season.id}"
 
 
 %br

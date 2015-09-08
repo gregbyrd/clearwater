@@ -1,8 +1,19 @@
-%h1 #{@season.year}
+%h1 #{@season.name}
+%h2 #{@season.start_date.strftime('%b \'%y')} - #{@season.end_date.strftime('%b \'%y')}
 
-%h1 Dates
+-if @is_current
+  =link_to "Add New Date", new_admin_date_path
+  %br
+  =link_to "Add New User", new_admin_user_path
+  %br
 
-%table
-  - @dates.each do |d|
-    %tr
-      %td= d.day
+=link_to "Admin Home", admin_path
+
+%h3 Dates
+
+= render 'fish_dates_table', :fish_dates=> @dates
+
+%h3 Users
+
+= render 'users_table', :users=> @users
+

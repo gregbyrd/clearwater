@@ -1,0 +1,15 @@
+%tr
+  %td.date= fish_date.day.strftime("%b %-d, %Y (%A)")
+  %td.slots= fish_date.slot_limit
+  - if fish_date.slots.count < fish_date.slot_limit
+    %td.slots.used= fish_date.slots.count
+  - else
+    %td.slots.full= fish_date.slots.count
+
+  %td.link= link_to "Show", admin_date_path(fish_date)
+  %td.link= link_to "Change Slot Limit", edit_admin_date_path(fish_date)
+  %td.link= link_to "Delete", admin_date_path(fish_date), 
+              method: :delete,
+              data: {confirm: "Deleting #{fish_date.day.to_s} -- are you sure?"},
+              id: "delete_#{fish_date.id}"
+

@@ -1,0 +1,11 @@
+%table.adminusers
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Phone
+      %th Slots
+      %th Used
+  %tbody
+    = render users, :in_current => true
+
