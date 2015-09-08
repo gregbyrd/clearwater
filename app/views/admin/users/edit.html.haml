@@ -16,6 +16,7 @@
   %p
     = label_tag :password, "Password"
     = text_field_tag :password, nil
+    (Leave blank, unless changing password.)
 
   -if !@user.admin?
     %p

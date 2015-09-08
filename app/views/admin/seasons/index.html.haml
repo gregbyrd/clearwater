@@ -1,5 +1,11 @@
 %h1 Seasons
 
+%p
+  =link_to "Add New Season", new_admin_season_path
+  %br
+  =link_to "Admin Home", admin_path
+
+
 %table.adminseasons
   %tbody
   = div_for(@seasons) do |season|
@@ -17,8 +23,10 @@
                   method: :put,
                   id: "put_#{season.id}"
 
+%p
+  Deleting a season removes all dates, reservations, and users for that season.
+  %br
+  If a user is associated with another season, that info will not be deleted.
+  %br
+  The current season cannot be deleted.  
 
-%br
-=link_to "Add New Season", new_admin_season_path
-%br
-=link_to "Admin Home", admin_path
