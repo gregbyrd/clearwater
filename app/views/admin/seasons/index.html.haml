@@ -1,8 +1,5 @@
 %h1 Seasons
 
-= debug(Properties.instance.current_season_id)
-= debug(@current)
-
 = div_for(@seasons) do |season|
   #{season.year}: #{season.start_date.strftime('%b \'%y')} - #{season.end_date.strftime('%b \'%y')}
   =link_to "Show", admin_season_path(season)
