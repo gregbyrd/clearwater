@@ -10,7 +10,8 @@
   %tbody
   = div_for(@seasons) do |season|
     %tr
-      %td #{season.year}: #{season.start_date.strftime('%b \'%y')} - #{season.end_date.strftime('%b \'%y')}
+      %td #{season.name}
+      %td #{season.start_date.strftime('%b \'%y')} - #{season.end_date.strftime('%b \'%y')}
       %td.link= link_to "Show", admin_season_path(season)
       -if current_season() && season.id == current_season().id
         %td.current(colspan="2") [CURRENT]

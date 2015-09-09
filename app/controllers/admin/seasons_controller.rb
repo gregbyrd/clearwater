@@ -3,7 +3,7 @@ class Admin::SeasonsController < ApplicationController
 
   def index
     authorize Season.new
-    @seasons = Season.all
+    @seasons = Season.order(year: :desc, start_month: :desc)
     @current = find_current_season()
   end
 
