@@ -50,4 +50,8 @@ class User < ActiveRecord::Base
     slots.count >= purchased
   end
 
+  def current?
+    season.id == current_season.id
+  end
+
 end

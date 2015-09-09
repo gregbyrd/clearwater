@@ -34,7 +34,7 @@
 = render partial: 'shared/user_slot_list', 
   locals: { slots: @slots, limit: @user.purchased }
 
-- if @user.available > 0 && !@user.admin
+- if @user.available > 0 && !@user.admin && @in_current_season
   %p
     = link_to "Make Reservation", new_user_reservation_path(@user)
 

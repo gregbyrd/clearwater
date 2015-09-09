@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     authorize @user
     @slots = @user.slots.sort_by {|s| s.fish_date.day }
     @num_slots = @user.slots.count
+    @in_current_season = @user.season.id == current_season.id
   end
 
   def edit
