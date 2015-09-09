@@ -18,6 +18,10 @@ class UserPolicy < ApplicationPolicy
   def destroy?
     user.admin?
   end
+
+  def copy?
+    user.admin?
+  end
   
   class Scope < Struct.new(:user, :scope)
     def resolve

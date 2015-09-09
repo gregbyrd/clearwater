@@ -17,8 +17,11 @@ Clearwater::Application.routes.draw do
       resources :reservations, only: [:new, :create], controller: :slots   
     end
     resources :reservations, only: [:edit, :update, :destroy], controller: :slots   
- resources :users
-
+    resources :users do
+      member do
+        get 'copy'
+      end
+    end
   end
 
   root "sessions#new"

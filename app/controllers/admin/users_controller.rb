@@ -16,6 +16,11 @@ class Admin::UsersController < ApplicationController
   def create
     user = User.new
     authorize user
+    # when copying into current season, these parameters should be set 
+    user.firstname = params[:firstname] if params[:firstname]
+    user.lastname = params[:lastname] if params[:lastname]
+    user.phone = params[:phone] if params[:phone]
+    #
     user.password = params[:password]
     user.password_confirmation = params[:password]
     user.email = params[:email]
@@ -36,7 +41,11 @@ class Admin::UsersController < ApplicationController
           flash.now[:warning] << m
         end
       end
-      render :new
+      if params[:copy]
+        redirect_to admin_users_path and return
+      else
+        render :new
+      end
     end
   end
 
@@ -74,5 +83,20 @@ class Admin::UsersController < ApplicationController
     end
     redirect_to admin_users_path
   end
-  
+
+  def copy
+    @user = User.find(params[:id])
+    authorize @user
+    if @user.season.id == current_season.id
+      flash[:alert] = "Not copied: User is already in current season."
+      redirect_to admin_users_path and return
+    end
+    tmp = current_season.users.find_by email: @user.email
+    if tmp 
+      flash[:alert] = "Not copied: User with the same email already in current season."
+      redirect_to admin_users_path and return
+    end
+    @user.purchased = 0
+  end
+
 end

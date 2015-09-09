@@ -17,5 +17,5 @@
               data: {confirm: "Deleting #{user.email} -- are you sure?"},
               id: "delete_#{user.id}"
   - if !user.admin && !in_current
-    %td.link= link_to "Copy to Current", admin_path
+    %td.link= link_to "Copy to Current", copy_admin_user_path(user)
 
